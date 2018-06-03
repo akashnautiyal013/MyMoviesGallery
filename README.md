@@ -4,9 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## To Run Website
 
 Clone the this Repositorie.
-Run `cd Mymoviegallery`.
+ `cd Mymoviegallery`.
 Run `npm install` to install all required modules.
-Run `ng serve`.
+Run `ng serve` to run development server.
+
 
 
 ## Development server
