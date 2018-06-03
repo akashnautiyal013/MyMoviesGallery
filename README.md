@@ -1,6 +1,13 @@
 # Mymoviegallery
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+## To Run Website
+
+Clone the this Repositorie.
+Run `cd Mymoviegallery`.
+Run `npm install` to install all required modules.
+Run `ng serve`.
+
 
 ## Development server
 
