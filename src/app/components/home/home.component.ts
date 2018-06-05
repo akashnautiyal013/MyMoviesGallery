@@ -5,6 +5,13 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { UserRegistrationService } from "../../services/user-registration.service";
 import { Router, NavigationExtras } from "@angular/router";
 // import {FirebaseListObservable } from 'angularfire2';
+import {RatingModule} from "ngx-rating";
+
+import {
+  ClickEvent,
+  HoverRatingChangeEvent,
+  RatingChangeEvent
+} from '@angular-star-rating-lib/angular-star-rating';
 import { Observable } from "rxjs";
 import * as firebase from "firebase/app";
 import "rxjs/add/operator/map";
@@ -42,6 +49,7 @@ import {
               ])
             )
           ]),
+
           { optional: true }
         ),
         query(
@@ -67,13 +75,37 @@ import {
           { optional: true }
         )
       ])
-    ])
+    ]),
+
+    trigger('queryAnimation', [
+     transition('* => goAnimate', [
+       // hide the inner elements
+       query('h1', style({ opacity: 0 })),
+       query('.card-text', style({ opacity: 0 })),
+ 
+       // animate the inner elements in, one by one
+       query('h1', animate(1000, style({ opacity: 1 }))),
+       query('.card-text', animate(1000, style({ opacity: 1 }))),
+
+     ])
+   ])
+
   ]
 })
 @Injectable()
 export class HomeComponent implements OnInit {
+ starsCount: number;
+
+  onClickResult: ClickEvent;
+  onHoverRatingChangeResult: HoverRatingChangeEvent;
+  onRatingChangeResult: RatingChangeEvent;
+
+  exp = '';
+ 
+    goAnimate() {
+      this.exp = 'goAnimate';
+    }
   movies: AngularFireList<any>;
-  user: Observable<firebase.User>;
   proyectos: Observable<any[]>;
   loading = true;
   userId: string = "";
@@ -85,7 +117,15 @@ export class HomeComponent implements OnInit {
     private firebasedb: AngularFireDatabase
   ) {
 
-    UserRegistrationService.getCurrentUser().subscribe(user => {
+    this.getDefault();
+
+  }
+
+
+
+  getDefault(){
+
+    this.UserRegistrationService.getCurrentUser().subscribe(user => {
       if (user) {
         this.userId = user.uid;
 
@@ -94,21 +134,22 @@ export class HomeComponent implements OnInit {
           return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
         });
         this.http
-          .get("http://www.omdbapi.com/?s=" + "2018" + "&apikey=PlsBanMe")
+          .get("https://www.omdbapi.com/?s=" + "war" + "&apikey=PlsBanMe")
           .subscribe(res => {
+            this.loading = false;
             this.responseData = res.json().Search;
-            this.searchResult = "New Movies";
+            this.searchResult = "Recommended Movies ";
           });
         this.getMovieList(user);
       } else {
         this.router.navigate(["login"]);
       }
     });
-
-
   }
 
-  ngOnInit() {}
+
+  ngOnInit() {
+  }
 
   onClickedCard(cardDetail) {
     let navigationExtras: NavigationExtras = {
@@ -122,21 +163,43 @@ export class HomeComponent implements OnInit {
   searchResult = "";
   responseData: any[] = [];
   Rowsmovies: any[] = [];
-
-  onSearch(event, data) {
+  onInputTextEdit(event, data) {
     if (data == 13) {
       this.searchMovie();
     }
     this.searchValue = event.target.value;
-    this.url =
-      "http://www.omdbapi.com/?s=" + this.searchValue + "&apikey=PlsBanMe";
+    this.url = "https://www.omdbapi.com/?s=" + this.searchValue + "&apikey=PlsBanMe";
   }
 
-  searchMovie() {
-    this.http.get(this.url).subscribe(res => {
+  searchMovie(){
+    this.searchResult = "";
+    this.loading = true;
+    this.http.get(this.url).toPromise().then(res => {
+       this.loading = false;
+       console.log('response');
+       if (res != null || res != undefined)  {
+         if (JSON.parse((<any>res)._body).Error != null || JSON.parse((<any>res)._body).Error != undefined ) {
+        
+        this.responseData = [];
+        
+        this.searchResult = JSON.parse((<any>res)._body).Error;
+        
+      }else{
+      
+       
       this.responseData = res.json().Search;
+
       this.searchResult = "SEARCH RESULTS";
-    });
+
+
+    }
+       }
+      
+    }).catch((err)=>{
+      console.log(err);
+      // alert('enter some movie name in text');
+    })
+
   }
 
   getMovieList(user) {
@@ -179,6 +242,22 @@ export class HomeComponent implements OnInit {
   logout() {
     this.UserRegistrationService.logout();
   }
+
+
+  onClick = ($event: ClickEvent) => {
+    console.log('onClick $event: ', $event);
+    this.onClickResult = $event;
+  };
+
+  onRatingChange = ($event: RatingChangeEvent) => {
+    console.log('onRatingUpdated $event: ', $event);
+    this.onRatingChangeResult = $event;
+  };
+
+  onHoverRatingChange = ($event: HoverRatingChangeEvent) => {
+    console.log('onHoverRatingChange $event: ', $event);
+    this.onHoverRatingChangeResult = $event;
+  };
 
   pushToMyMovieGallery(event) {
     this.movies.push({

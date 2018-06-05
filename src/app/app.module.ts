@@ -10,13 +10,13 @@ import {GetMoviesService} from './services/get-movies.service' ;
 import {UserRegistrationService} from './services/user-registration.service';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {RouterModule,Router} from '@angular/router';
-
+import {RatingModule} from "ngx-rating";
 import {environment} from './../environments/environment';
 import { HttpModule } from '@angular/http';
 import { LoginComponent } from './components/login/login.component';
 import { MyMovieGalleryComponent } from './components/my-movie-gallery/my-movie-gallery.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-
+import { StarRatingModule } from 'angular-star-rating';
 const Routes = [
 	{path:'home',component:HomeComponent},
 	{path:'login',component:LoginComponent},
@@ -39,13 +39,16 @@ const Routes = [
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(Routes )
+    RouterModule.forRoot(Routes ),
+    StarRatingModule.forRoot(),
+    RatingModule,
 
   ],
   providers: [
     UserRegistrationService,
     GetMoviesService
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { 

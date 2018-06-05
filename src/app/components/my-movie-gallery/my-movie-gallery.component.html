@@ -1,19 +1,15 @@
-<div class="container">          
-      <div class="row">
-        <div  class="col-md-6">       	
-          <div  class="card mb-6 box-shadow">
-          	 <div *ngIf='responseData'  >
-            <img class="card-img-top" data-src={{responseData.Poster}} alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">{{responseData.Title}}</p>
+<div class="container detailview">          
+      <div class="row detailview">
+          <div  class="box-shadow detailview">
+          <div *ngIf='responseData' width='100%'>
+            <img class="card-img-top detailview" data-src={{responseData.Poster}} alt="Card image cap">
+            <div class="card-body detailview detailview">
+              <h1 class="card-text detailview detailview">{{responseData.Title}}</h1>
               <div class="d-flex justify-content-between align-items-center">
                
-                <small class="text-muted">Year {{responseData.Year}}</small>
+                <small class="text-muted detailview">Year {{responseData.Year}}</small>
               </div>
-            </div>
-           
-          </div>
-          
+            </div>          
         </div>
     </div>
 

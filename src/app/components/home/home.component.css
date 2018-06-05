@@ -76,8 +76,80 @@ img.profileImage{
   height:100px;
   width:100px;
   border-radius: 50px;
+
 }
 .card-img-top{
-  height:250px;
+
+}
+@media (max-width: 500px) {
+  .card-body.d-flex.justify-content-between.align-items-center {
+    flex-direction: column;
+    padding-top: 0px;
+
+
+  }
+  input.SearchInput[_ngcontent-c1]{
+    width:190px;
+  }
+  img.ng-tns-c1-0 {
+    height: 20px;
+}
+  small.text-muted {
+      margin-top: 10px;
+  }
+  .col-1[_ngcontent-c1], .col-2[_ngcontent-c1], .col-3[_ngcontent-c1], .col-4[_ngcontent-c1], .col-5[_ngcontent-c1], .col-6[_ngcontent-c1], .col-7[_ngcontent-c1], .col-8[_ngcontent-c1], .col-9[_ngcontent-c1], .col-10[_ngcontent-c1], .col-11[_ngcontent-c1], .col-12[_ngcontent-c1], .col[_ngcontent-c1], .col-auto[_ngcontent-c1], .col-sm-1[_ngcontent-c1], .col-sm-2[_ngcontent-c1], .col-sm-3[_ngcontent-c1], .col-sm-4[_ngcontent-c1], .col-sm-5[_ngcontent-c1], .col-sm-6[_ngcontent-c1], .col-sm-7[_ngcontent-c1], .col-sm-8[_ngcontent-c1], .col-sm-9[_ngcontent-c1], .col-sm-10[_ngcontent-c1], .col-sm-11[_ngcontent-c1], .col-sm-12[_ngcontent-c1], .col-sm[_ngcontent-c1], .col-sm-auto[_ngcontent-c1], .col-md-1[_ngcontent-c1], .col-md-2[_ngcontent-c1], .col-md-3[_ngcontent-c1], .col-md-4[_ngcontent-c1], .col-md-5[_ngcontent-c1], .col-md-6[_ngcontent-c1], .col-md-7[_ngcontent-c1], .col-md-8[_ngcontent-c1], .col-md-9[_ngcontent-c1], .col-md-10[_ngcontent-c1], .col-md-11[_ngcontent-c1], .col-md-12[_ngcontent-c1], .col-md[_ngcontent-c1], .col-md-auto[_ngcontent-c1], .col-lg-1[_ngcontent-c1], .col-lg-2[_ngcontent-c1], .col-lg-3[_ngcontent-c1], .col-lg-4[_ngcontent-c1], .col-lg-5[_ngcontent-c1], .col-lg-6[_ngcontent-c1], .col-lg-7[_ngcontent-c1], .col-lg-8[_ngcontent-c1], .col-lg-9[_ngcontent-c1], .col-lg-10[_ngcontent-c1], .col-lg-11[_ngcontent-c1], .col-lg-12[_ngcontent-c1], .col-lg[_ngcontent-c1], .col-lg-auto[_ngcontent-c1], .col-xl-1[_ngcontent-c1], .col-xl-2[_ngcontent-c1], .col-xl-3[_ngcontent-c1], .col-xl-4[_ngcontent-c1], .col-xl-5[_ngcontent-c1], .col-xl-6[_ngcontent-c1], .col-xl-7[_ngcontent-c1], .col-xl-8[_ngcontent-c1], .col-xl-9[_ngcontent-c1], .col-xl-10[_ngcontent-c1], .col-xl-11[_ngcontent-c1], .col-xl-12[_ngcontent-c1], .col-xl[_ngcontent-c1], .col-xl-auto[_ngcontent-c1] {
+      position: relative;
+      width: 48.5%;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-right: 0;
+      padding-left: 2.5%;
+  }
+}
+
+.container.heightset {
+    min-height: 200px;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+    position: relative;
+    width: 50%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+button.btn.btn-sm.btn-outline-secondary.search {
+    background-color: #007bff;
+    color: white;
+    border: 0px;
+}
+
+.album.py-5.bg-light.searchresut {
+    left: 0;
+    position: relative;
+    right: 0;
+
+}
+img.ng-tns-c1-0 {
+    height: 55px;
+}
+
+.myContainer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    opacity: 0.8;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    height: 100%;
+    min-height: 600px;
+    text-align: center;
+
 }
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }

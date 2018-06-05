@@ -6,7 +6,7 @@
             <strong>MovieGallery</strong>
           </a>
           <div>
-            <input key-bind="$event.keyCode == 13 && searcMovie()" class='SearchInput' (keyup)="onSearch($event,$event.keyCode)" type="text" placeholder="Search for movies..">
+            <input key-bind="$event.keyCode == 13 && searcMovie()" class='SearchInput' (keyup)="onInputTextEdit($event,$event.keyCode)" type="text" placeholder="Search for movies..">
              <button type="button" (click)="searchMovie()" class="btn btn-sm btn-outline-secondary search">Search
              </button>
           </div>
@@ -17,14 +17,15 @@
 <main role="main">
 
 
-    <section *ngIf='UserRegistrationService.user | async as user' class="jumbotron text-center">
-        <div class="container">
-            <div style="margin-top:20px">
+    <section class="jumbotron text-center">
+        <div class="container heightset">
+            <div *ngIf='UserRegistrationService.user | async as user' style="margin-top:20px">
                 <img class='profileImage' [src]="user.photoURL">
+                <h1 class="jumbotron-heading">Hello {{user.displayName}}</h1>
             </div>
-            <h1 class="jumbotron-heading">Hello {{user.displayName}}</h1>
+            
             <p>
-                <button class="btn btn-primary btn" (click)="logout()">logout</button>
+                <button *ngIf='UserRegistrationService.user | async as user' class="btn btn-primary btn" (click)="logout()">logout</button>
 
             </p>
 
@@ -34,10 +35,11 @@
 
 
 
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <h1 class="jumbotron-heading">{{searchResult}}</h1>
-            <div class="row" [@listAnimation]="responseData">
+    <div class="album py-5 bg-light searchresut">
+      <div *ngIf= "loading === true "  class="myContainer"> <img clasName="loagingimage" src="/assets/images/Spinner-0.5s-200px.svg" ></div>
+        <div [@queryAnimation]='goAnimate' class="container">
+            <h1  class="jumbotron-heading">{{searchResult}}</h1>
+            <div  [@listAnimation]='responseData' class="row" >
                 <div *ngFor="let movie of responseData; let i = index" class="col-md-3">
                     <div class="card mb-3 box-shadow">
                       <div (click)='onClickedCard(movie)'>
@@ -48,11 +50,11 @@
                         </div>
                       </div>
                       <div class="card-body d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
+                        <div class="btn-group ">
                             <button type="submit" (click)="pushTOMyMovie(movie)" class="btn btn-sm btn-outline-secondary">Add to gallery</button>
                             <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                         </div>
-                        <small class="text-muted">Year {{movie.Year}}</small>
+                                                    <small class="text-muted">Year {{movie.Year}}</small>
                     </div>
                     </div>
                 </div>
@@ -62,8 +64,8 @@
 
 
 
-    <div class="album py-5 bg-light">
-        <div class="container">
+    <div class="album py-5 bg-light mygallery">
+        <div  *ngIf='UserRegistrationService.user | async as user' class="container">
             <h1 class="jumbotron-heading"> MY GALLERY</h1>
             <div [@listAnimation]="proyectos" class="row">
                 <div *ngFor='let mov of proyectos | async' class="col-md-3" >
@@ -75,7 +77,56 @@
                             </div>
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+                          <div class="container">
+
+    <!-- regular rating -->
+    <rating [(ngModel)]="starsCount"></rating>
+    <br/><br/>
+
+    <!-- rating with 10 stars -->
+    <rating [(ngModel)]="starsCount"
+            [max]="10">
+    </rating>
+    <br/><br/>
+
+    <!-- rating with custom icons -->
+    <rating [(ngModel)]="starsCount"
+            fullIcon="◆"
+            emptyIcon="◇">
+    </rating>
+    <br/><br/>
+
+    <!-- rating readonly -->
+    <rating [(ngModel)]="starsCount"
+            [readonly]="true">
+    </rating>
+    <br/><br/>
+
+    <!-- rating disabled -->
+    <rating [(ngModel)]="starsCount"
+            [disabled]="true">
+    </rating>
+    <br/><br/>
+
+    <!-- rating required -->
+    <rating [(ngModel)]="starsCount"
+            [required]="true">
+    </rating>
+    <br/><br/>
+
+    <!-- rating with half stars -->
+    <rating [(ngModel)]="starsCount"
+            [float]="true">
+    </rating>
+    <br/><br/>
+
+    <!-- rating with custom titles -->
+    <rating [(ngModel)]="starsCount"
+            [titles]="['one', 'two', 'three', 'four', 'five']">
+    </rating>
+    <br/><br/>
+
+</div>      <div class="btn-group">
                                 <button type="button" (click)="deleteSth(mov.key)" class="btn btn-sm btn-outline-secondary">Remove</button>
                             </div>
                             <small class="text-muted">Year {{mov.Year}}</small>
