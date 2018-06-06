@@ -28,10 +28,10 @@
     input.reviewInput {
         width: 70% !important;
     }
-    button.btn.btn-sm.btn-outline-secondary.submitreview[_ngcontent-c1] {   
-        margin-top: 10px;
-        margin-left: 70px;
-        width: 70%;
+    button.btn.btn-sm.btn-outline-secondary.submitreview{   
+        margin-top: 10px !important;
+        margin-left: 70px !important;
+        width: 70% !important;
     }
 }
 
