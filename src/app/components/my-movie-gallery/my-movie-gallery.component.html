@@ -1,18 +1,41 @@
 <div class="container detailview">          
       <div class="row detailview">
-          <div  class="box-shadow detailview">
-          <div *ngIf='responseData' width='100%'>
-            <img class="card-img-top detailview" data-src={{responseData.Poster}} alt="Card image cap">
-            <div class="card-body detailview detailview">
-              <h1 class="card-text detailview detailview">{{responseData.Title}}</h1>
-              <div class="d-flex justify-content-between align-items-center">
-               
-                <small class="text-muted detailview">Year {{responseData.Year}}</small>
-              </div>
-            </div>          
-        </div>
-    </div>
+        <div  class="box-shadow detailview">
+          <div *ngIf='movieData' width='100%'>
+            <img class="card-img-top detailview" data-src={{movieData.Poster}} alt="Card image cap">
+                <div class="card-body detailview detailview">
+                  <h1 class="card-text detailview detailview">{{movieData.Title}}</h1>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted detailview">Year {{movieData.Year}}</small>
+                  </div>
+                  <div>
+                  <img class="card-img-top reviewimg" data-src={{userDetails.photoURL}} alt="Card image cap">
+                  <input class='reviewInput' (keyup)="onInputTextEdit($event,$event.keyCode)" type="text" placeholder="write a review for this movie...">
+                  <button type="button" (click)="onSubmitReview()" class="btn btn-sm btn-outline-secondary submitreview">SUBMIT
+                  </button>
+                </div>
+                <h1 class='comments'>{{totalCommentCount}} Comments</h1>
+                 <div class='saperater'></div>
+                 <div class ="reviewText" *ngFor='let review of (proyectos | async)?.slice().reverse()'>
+                   
+                  <div class='d-flex'>
+                  <img class="card-img-top reviewimg" data-src={{review.Userimg}} alt="Card image cap">
+                  <div class = "justify-content-between reviewText">
+                  <div class='d-flex'>
+                   <h3 class ="reviewText">{{review.Name}}</h3><span class=' text-muted textReviewDate'>{{review.Date}}</span>
+                 </div>
+                   <p>{{review.Review}}</p>
+                   </div>
+                 </div>
 
-    
-</div>
+                 
+                 </div>
+                </div>  
+
+            </div>
+            
+        </div>   
+        
+      </div>
+
 </div>

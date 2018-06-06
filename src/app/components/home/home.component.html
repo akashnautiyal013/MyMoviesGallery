@@ -36,8 +36,58 @@
 
 
     <div class="album py-5 bg-light searchresut">
-      <div *ngIf= "loading === true "  class="myContainer"> <img clasName="loagingimage" src="/assets/images/Spinner-0.5s-200px.svg" ></div>
-        <div [@queryAnimation]='goAnimate' class="container">
+        <div *ngIf= "loading === true "  class="myContainer"> 
+            <svg class="lds-spinner" width="50px"  height="50px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.4583333333333333s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(30 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(60 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.375s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(90 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(120 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.2916666666666667s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(150 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.25s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(180 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.20833333333333334s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(210 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(240 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.125s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(270 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(300 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.041666666666666664s" repeatCount="indefinite"></animate>
+              </rect>
+            </g><g transform="rotate(330 50 50)">
+              <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#007bff">
+                <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="0s" repeatCount="indefinite"></animate>
+              </rect>
+            </g></svg>
+        </div>
+        <div class="container">
             <h1  class="jumbotron-heading">{{searchResult}}</h1>
             <div  [@listAnimation]='responseData' class="row" >
                 <div *ngFor="let movie of responseData; let i = index" class="col-md-3">
@@ -68,7 +118,7 @@
         <div  *ngIf='UserRegistrationService.user | async as user' class="container">
             <h1 class="jumbotron-heading"> MY GALLERY</h1>
             <div [@listAnimation]="proyectos" class="row">
-                <div *ngFor='let mov of proyectos | async' class="col-md-3" >
+                <div *ngFor='let mov of (proyectos | async)?.slice().reverse()' class="col-md-3" >
                     <div class="card mb-3 box-shadow" >
                         <div (click)='onClickedCard(mov)'>
                             <img class="card-img-top" data-src={{mov.Poster}} alt="Card image cap">
@@ -77,56 +127,7 @@
                             </div>
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center">
-                          <div class="container">
-
-    <!-- regular rating -->
-    <rating [(ngModel)]="starsCount"></rating>
-    <br/><br/>
-
-    <!-- rating with 10 stars -->
-    <rating [(ngModel)]="starsCount"
-            [max]="10">
-    </rating>
-    <br/><br/>
-
-    <!-- rating with custom icons -->
-    <rating [(ngModel)]="starsCount"
-            fullIcon="◆"
-            emptyIcon="◇">
-    </rating>
-    <br/><br/>
-
-    <!-- rating readonly -->
-    <rating [(ngModel)]="starsCount"
-            [readonly]="true">
-    </rating>
-    <br/><br/>
-
-    <!-- rating disabled -->
-    <rating [(ngModel)]="starsCount"
-            [disabled]="true">
-    </rating>
-    <br/><br/>
-
-    <!-- rating required -->
-    <rating [(ngModel)]="starsCount"
-            [required]="true">
-    </rating>
-    <br/><br/>
-
-    <!-- rating with half stars -->
-    <rating [(ngModel)]="starsCount"
-            [float]="true">
-    </rating>
-    <br/><br/>
-
-    <!-- rating with custom titles -->
-    <rating [(ngModel)]="starsCount"
-            [titles]="['one', 'two', 'three', 'four', 'five']">
-    </rating>
-    <br/><br/>
-
-</div>      <div class="btn-group">
+                           <div class="btn-group">
                                 <button type="button" (click)="deleteSth(mov.key)" class="btn btn-sm btn-outline-secondary">Remove</button>
                             </div>
                             <small class="text-muted">Year {{mov.Year}}</small>

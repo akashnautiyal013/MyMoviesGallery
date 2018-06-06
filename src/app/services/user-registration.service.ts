@@ -14,26 +14,28 @@ export class UserRegistrationService {
   	this.user = afAuth.authState;
   	
   }
-
+  
+  // login with google
   loginWithGoogle(){
   	const provider = new firebase.auth.GoogleAuthProvider();
   	return this.afAuth.auth.signInWithPopup(provider);
   }
-
+   // login with facebook
   loginWithFacebook(){
     const provider = new firebase.auth.FacebookAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider);
   
   }
-
+  // get current user
   getCurrentUser(){
-  	console.log('firebase.auth().currentUser',this.user)
+
   	return this.user;
   }
 
-
+  // logout user
   logout(){
   	this.afAuth.auth.signOut();
-  	this.router.navigate(['home']);
+    // navigate to login page
+  	this.router.navigate(['login']);
   }
 }

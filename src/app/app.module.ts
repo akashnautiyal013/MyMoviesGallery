@@ -8,6 +8,8 @@ import {AngularFireDatabaseModule}  from 'angularfire2/database';
 import {GetMoviesService} from './services/get-movies.service' ;
 
 import {UserRegistrationService} from './services/user-registration.service';
+import {GetreviewsserviceService} from './services/getreviewsservice.service';
+
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {RouterModule,Router} from '@angular/router';
 import {RatingModule} from "ngx-rating";
@@ -40,13 +42,15 @@ const Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     RouterModule.forRoot(Routes ),
-    StarRatingModule.forRoot(),
     RatingModule,
+    StarRatingModule.forRoot(),
+   
 
   ],
   providers: [
     UserRegistrationService,
-    GetMoviesService
+    GetMoviesService,
+    GetreviewsserviceService
   ],
   
   bootstrap: [AppComponent]
