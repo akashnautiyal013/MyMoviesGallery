@@ -62,7 +62,7 @@ export class MyMovieGalleryComponent implements OnInit {
 
     // when user press submit button or presses enter 
     onSubmitReview(){
-
+       
        // pushing review data to firebase db
        firebase.database().ref("reviews/"+ this.movieData.Title)
        .push({
