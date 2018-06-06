@@ -57,6 +57,7 @@ export class MyMovieGalleryComponent implements OnInit {
         this.onSubmitReview();
         
       }
+       this.reviewMsg = event.target.value;
     }
 
     // when user press submit button or presses enter 
